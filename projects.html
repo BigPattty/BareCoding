@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{
+  navOpen: false,
+  search: '',
+  projects: [
+    { id: 1, name: 'Project One', desc: 'A powerful tool for X use case.', img: '/assets/project1.png' },
+    { id: 2, name: 'Project Two', desc: 'An open-source library for Y.', img: '/assets/project2.png' },
+    { id: 3, name: 'Project Three', desc: 'A sleek web component for Z.', img: '/assets/project3.png' },
+    { id: 4, name: 'Project Four', desc: 'A sleek web component for Z.', img: '/assets/project3.png' },
+    { id: 5, name: 'Project Five', desc: 'A sleek web component for Z.', img: '/assets/project3.png' }
+  ]
+}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BareCoding – Projects</title>
+
+  <!-- Tailwind CSS + Custom Color Theme -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#2A2A2A',        /* dark background */
+            surface: '#3A3A3A',   /* card surface */
+            accent: '#22C55E',    /* emerald accent */
+            highlight: '#16A34A'  /* darker emerald */
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Alpine.js for interactivity -->
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({ duration: 700, once: true });
+    });
+  </script>
+
+  <style>
+    /* Disable mobile tap highlight */
+    *, html { -webkit-tap-highlight-color: transparent; }
+  </style>
+</head>
+<body class="bg-bg text-gray-100 antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 bg-bg bg-opacity-95 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto flex items-center justify-between h-20 px-4 md:px-8">
+      <a href="index.html" class="text-3xl font-bold">BareCoding</a>
+      <div class="hidden md:flex items-center space-x-8 text-lg">
+        <a href="index.html" class="hover:text-accent transition">Home</a>
+        <a href="projects.html" class="text-accent font-semibold border-b-2 border-accent pb-1">Projects</a>
+        <a href="about.html" class="hover:text-accent transition">About</a>
+        <a href="login.html" class="px-4 py-2 bg-accent text-bg rounded-full font-semibold hover:bg-opacity-90 transition">Login</a>
+      </div>
+      <button @click="navOpen = !navOpen" class="md:hidden p-2 focus:outline-none">
+        <svg x-show="!navOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 18h16" />
+        </svg>
+        <svg x-show="navOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div x-show="navOpen" x-transition class="md:hidden bg-bg bg-opacity-95 backdrop-blur-md px-4">
+      <nav class="flex flex-col items-center py-6 space-y-4 text-xl">
+        <a href="index.html" @click="navOpen = false" class="hover:text-accent transition">Home</a>
+        <a href="projects.html" @click="navOpen = false" class="text-accent font-semibold">Projects</a>
+        <a href="about.html" @click="navOpen = false" class="hover:text-accent transition">About</a>
+        <a href="login.html" @click="navOpen = false" class="px-4 py-2 bg-accent text-bg rounded-full hover:bg-opacity-90 transition">Login</a>
+      </nav>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="pt-36 pb-16 bg-gradient-to-br from-surface to-bg text-center scroll-mt-20">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4" data-aos="fade-down">Our Open-Source Showcase</h1>
+    <p class="text-base md:text-lg text-gray-300 max-w-xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200">
+      Browse through a curated list of projects designed to accelerate your development workflow. Contribute, learn, and grow with the community.
+    </p>
+    <a href="#projects" class="inline-block px-6 py-3 bg-accent text-bg rounded-full font-semibold hover:bg-opacity-90 transition" data-aos="fade-up" data-aos-delay="400">
+      View All Projects
+    </a>
+  </section>
+
+  <!-- SEARCH & HEADER -->
+  <header id="projects" class="pt-16 pb-8 bg-gradient-to-br from-surface via-bg to-surface text-center scroll-mt-20">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4" data-aos="fade-down">Explore Projects</h2>
+    <input
+      x-model="search"
+      type="text"
+      placeholder="Search projects..."
+      class="mt-4 px-4 py-3 w-full sm:w-80 max-w-md rounded-full bg-surface placeholder-gray-400 text-gray-100 focus:outline-none focus:ring-2 focus:ring-highlight transition"
+      data-aos="fade-up" />
+  </header>
+
+  <!-- PROJECT CARDS -->
+  <main class="py-16 px-4 md:px-16 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up">
+      <template x-for="proj in projects.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))" :key="proj.id">
+        <div class="bg-surface rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition" data-aos="flip-left">
+          <img :src="proj.img" :alt="proj.name" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2" x-text="proj.name"></h3>
+            <p class="text-gray-300 mb-4" x-text="proj.desc"></p>
+            <a :href="`project.html?id=${proj.id}`" class="inline-block px-4 py-2 bg-highlight text-bg rounded-full font-medium hover:bg-opacity-90 transition">View Details</a>
+          </div>
+        </div>
+      </template>
+      <p x-show="projects.filter(p => p.name.toLowerCase().includes(search.toLowerCase())).length === 0" class="col-span-full text-center text-gray-500">No projects found.</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-8 text-center text-gray-400 bg-bg">
+    <div class="flex justify-center space-x-4 mb-4">
+      <a href="https://discord.gg/yourserver" class="hover:text-accent transition">Discord</a>
+      <a href="https://instagram.com/yourusername" class="hover:text-accent transition">Instagram</a>
+      <a href="https://facebook.com/yourusername" class="hover:text-accent transition">Facebook</a>
+    </div>
+    <p>&copy; 2025 BareCoding. All rights reserved.</p>
+  </footer>
+</body>
+</html>

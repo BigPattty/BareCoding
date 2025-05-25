@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ navOpen: false }">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BareCoding – Home</title>
+
+  <!-- Tailwind CDN + Custom Colors -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#2A2A2A',        /* dark background */
+            surface: '#3A3A3A',   /* card surface */
+            accent: '#22C55E',    /* emerald accent */
+            highlight: '#16A34A'  /* lighter muted slate */
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- AOS + Alpine.js -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', ()=>AOS.init({ duration: 800, once: true }));</script>
+
+  <style>*,html{-webkit-tap-highlight-color:transparent}</style>
+</head>
+<body class="bg-bg text-gray-100 antialiased overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full z-50 bg-bg bg-opacity-90 backdrop-blur-sm">
+    <div class="max-w-6xl mx-auto flex items-center justify-between h-20 px-6 md:px-8">
+      <a href="index.html" class="text-3xl font-bold tracking-tight focus:outline-none">BareCoding</a>
+      <div class="hidden md:flex items-center space-x-6 text-lg">
+        <a href="index.html" class="hover:text-accent transition focus:outline-none">Home</a>
+        <a href="projects.html" class="hover:text-accent transition focus:outline-none">Projects</a>
+        <a href="about.html" class="hover:text-accent transition focus:outline-none">About</a>
+        <a href="login.html" class="px-4 py-2 bg-accent text-bg rounded-full font-semibold hover:bg-opacity-90 transition focus:outline-none">Login</a>
+      </div>
+      <button @click="navOpen=!navOpen" class="md:hidden p-2 focus:outline-none">
+        <svg x-show="!navOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 18h16" />
+        </svg>
+        <svg x-show="navOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div x-show="navOpen"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 -translate-y-4"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-4"
+         x-cloak class="md:hidden bg-bg bg-opacity-95 backdrop-blur-md">
+      <nav class="flex flex-col items-center py-6 space-y-4 text-xl">
+        <a href="index.html" @click="navOpen=false" class="hover:text-accent transition focus:outline-none">Home</a>
+        <a href="projects.html" @click="navOpen=false" class="hover:text-accent transition focus:outline-none">Projects</a>
+        <a href="about.html" @click="navOpen=false" class="hover:text-accent transition focus:outline-none">About</a>
+        <a href="login.html" @click="navOpen=false" class="px-4 py-2 bg-accent text-bg rounded-full hover:bg-opacity-90 transition focus:outline-none">Login</a>
+      </nav>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="h-screen flex items-center justify-center bg-gradient-to-br from-surface via-bg to-surface text-center px-6">
+    <div class="relative z-10 max-w-3xl" data-aos="zoom-in">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">Open-Source Done the Right Way</h1>
+      <p class="text-lg md:text-xl text-gray-300 mb-12">Pro-grade repos—curated, documented, and ready for contributions. Built for performance and clarity.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="projects.html" class="px-8 py-4 bg-highlight text-bg rounded-full font-semibold hover:shadow-lg transition" data-aos="fade-right">Browse Projects</a>
+        <a href="#community" class="px-8 py-4 border-2 border-accent text-accent rounded-full font-semibold hover:bg-accent hover:text-bg transition" data-aos="fade-left">Join Community</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURED PROJECTS -->
+  <section class="py-20 px-6 md:px-16 max-w-6xl mx-auto" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center">Featured Projects</h2>
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Example Card -->
+      <div class="bg-surface rounded-2xl overflow-hidden shadow-xl hover:scale-105 transition-transform" data-aos="flip-left">
+        <img src="/assets/project1.png" alt="Project One" class="w-full h-40 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold mb-2">Project One</h3>
+          <p class="text-gray-400 text-sm">Key features highlighted in a concise blurb.</p>
+          <a href="project.html?id=1" class="mt-4 inline-block text-highlight font-medium">Learn More →</a>
+        </div>
+      </div>
+      <!-- Copy for other cards... -->
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-20	bg-surface px-6 md:px-16" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">What Users Say</h2>
+    <div class="space-y-6 max-w-2xl mx-auto">
+      <div class="bg-bg p-6 rounded-lg shadow-inner" data-aos="fade-right">
+        <blockquote class="italic text-gray-300">“BareCoding’s repos are the cleanest and best-documented I’ve ever used.”</blockquote>
+        <p class="mt-4 text-right font-semibold">— Open-Source Enthusiast</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY CTA -->
+  <section id="community" class="py-20 text-center px-6	md:px-16 max-w-2xl mx-auto" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Join the Community</h2>
+    <p class="text-gray-300 mb-8">Connect on Discord or Instagram to join the community.</p>
+    <div class="flex	flex-col sm:flex-row justify-center gap-4">
+      <a href="https://discord.gg/yourserver" class="px-8 py-3 bg-accent text-bg rounded-full font-semibold hover:shadow-lg transition">Discord</a>
+      <a href="https://instagram.com/yourusername" class="px-8 py-3 border-2 border-highlight text-highlight rounded-full font-semibold hover:bg-highlight hover:text-bg transition">Instagram</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer	class="py-10 text-center text-gray-500 bg-bg">
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="https://discord.gg/yourserver" class="hover:text-accent transition">Discord</a>
+      <a href="https://instagram.com/yourusername" class="hover:text-accent transition">Instagram</a>
+      <a href="https://facebook.com/yourusername" class="hover:text-accent transition">Facebook</a>
+    </div>
+    <p>&copy; 2025 BareCoding. All rights reserved.</p>
+  </footer>
+</body>
+</html
