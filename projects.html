@@ -86,7 +86,7 @@
           <h3 class="text-xl font-semibold mb-2" x-text="repo.name"></h3>
           <p class="text-gray-300 flex-grow" x-text="repo.description || 'No description.'"></p>
           <div class="mt-4 flex gap-2">
-            <a :href="repo.html_url" target="_blank" class="px-3 py-1 bg-accent text-bg rounded-full text-sm">GitHub</a>
+            <a :href="`project.html?id=${repo.name}`" class="px-3 py-1 bg-accent text-bg rounded-full text-sm">More Info</a>
             <a :href="repo.homepage||'#'" target="_blank" class="px-3 py-1 border-2 border-accent text-accent rounded-full text-sm">Demo</a>
           </div>
         </div>
@@ -131,4 +131,3 @@
     }
   </script>
 </body>
-</html>
